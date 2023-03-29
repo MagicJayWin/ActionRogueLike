@@ -52,9 +52,11 @@ void ASCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 	PlayerInputComponent->BindAxis("MoveForward", this, &ASCharacter::MoveForward);
 	//左右移动
 	PlayerInputComponent->BindAxis("MoveRight", this, &ASCharacter::MoveRight);
-	
+	//鼠标视角
 	PlayerInputComponent->BindAxis("Turn", this, &APawn::AddControllerYawInput);
 	PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
+	//绑定动作
+	PlayerInputComponent->BindAction("PrimaryAttack", IE_Pressed, this, &ASCharacter::PrimaryAttack);
 }
 
 void ASCharacter::MoveForward(float value)
@@ -76,4 +78,11 @@ void ASCharacter::MoveRight(float value)
 	const FVector wightVector = FRotationMatrix(controlRot).GetScaledAxis(EAxis::Y);
 	
 	AddMovementInput(wightVector, value);
+}
+
+//攻击动作
+void ASCharacter::PrimaryAttack()
+{
+	FTransform SpawnTM = FTransform()
+	GetWorld() ->SpawnActor<AActor>(ProjectileClass, SpawnTM, SpawnParam)
 }

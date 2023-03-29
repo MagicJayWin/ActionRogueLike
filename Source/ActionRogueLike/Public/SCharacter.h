@@ -27,6 +27,9 @@ protected:
 	//移动函数
 	void MoveForward(float value);
 	void MoveRight(float value);
+
+	//攻击动作
+	void PrimaryAttack();
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
