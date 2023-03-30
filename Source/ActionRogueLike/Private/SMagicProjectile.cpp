@@ -15,6 +15,7 @@ ASMagicProjectile::ASMagicProjectile()
 	PrimaryActorTick.bCanEverTick = true;
 	//实例化球体组件，设置为根节点
 	SphereComp = CreateDefaultSubobject<USphereComponent>("SphereComp");
+	SphereComp->SetCollisionProfileName("Projectile");
 	RootComponent = SphereComp;
 
 	effectComp = CreateDefaultSubobject<UParticleSystemComponent>("effectComp");
