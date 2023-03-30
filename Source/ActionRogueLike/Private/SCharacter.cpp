@@ -83,10 +83,9 @@ void ASCharacter::MoveRight(float value)
 //攻击动作
 void ASCharacter::PrimaryAttack()
 {
-	for(TFieldIterator<FProperty> PropertyIter(GetClass());PropertyIter;++PropertyIter)
-	{
-		
-	}
-	//FTransform SpawnTM = FTransform()
-	//GetWorld() ->SpawnActor<AActor>(ProjectileClass, SpawnTM, SpawnParam)
+	FTransform SpawnTM = FTransform(GetControlRotation(), GetActorLocation());
+	FActorSpawnParameters SpawnParam;
+	
+	SpawnParam.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+	GetWorld() ->SpawnActor<AActor>(ProjectileClass, SpawnTM, SpawnParam);
 }
