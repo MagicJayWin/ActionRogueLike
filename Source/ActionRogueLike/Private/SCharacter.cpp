@@ -83,6 +83,10 @@ void ASCharacter::MoveRight(float value)
 //攻击动作
 void ASCharacter::PrimaryAttack()
 {
-	FTransform SpawnTM = FTransform()
-	GetWorld() ->SpawnActor<AActor>(ProjectileClass, SpawnTM, SpawnParam)
+	for(TFieldIterator<FProperty> PropertyIter(GetClass());PropertyIter;++PropertyIter)
+	{
+		
+	}
+	//FTransform SpawnTM = FTransform()
+	//GetWorld() ->SpawnActor<AActor>(ProjectileClass, SpawnTM, SpawnParam)
 }
