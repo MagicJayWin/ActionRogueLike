@@ -57,6 +57,8 @@ void ASCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 	PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
 	//绑定动作
 	PlayerInputComponent->BindAction("PrimaryAttack", IE_Pressed, this, &ASCharacter::PrimaryAttack);
+	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ASCharacter::Jump);
+	
 }
 
 void ASCharacter::MoveForward(float value)
@@ -65,6 +67,7 @@ void ASCharacter::MoveForward(float value)
 	controlRot.Pitch = 0.0f;
 	controlRot.Roll = 0.0f;
 	AddMovementInput(controlRot.Vector(), value);
+	
 }
 
 void ASCharacter::MoveRight(float value)
@@ -87,7 +90,7 @@ void ASCharacter::PrimaryAttack()
 
 	const FTransform SpawnTM = FTransform(GetControlRotation(), HandLocation);
 	FActorSpawnParameters SpawnParam;
-	
+
 	SpawnParam.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 	GetWorld() ->SpawnActor<AActor>(ProjectileClass, SpawnTM, SpawnParam);
 }
