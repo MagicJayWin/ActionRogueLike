@@ -12,11 +12,16 @@ class ACTIONROGUELIKE_API AASItemChest : public AActor, public ISGamePlayInterfa
 {
 	GENERATED_BODY()
 
-	virtual void InterAct_Implementation(APawn* InstigatorPawn) override;
+
+	
 	
 public:	
 	// Sets default values for this actor's properties
 	AASItemChest();
+	UPROPERTY(EditAnywhere)
+	float TargetPitch;
+	void InterAct_Implementation(APawn* InstigatorPawn) ;
+	
 
 protected:
 	UPROPERTY(VisibleAnywhere)
