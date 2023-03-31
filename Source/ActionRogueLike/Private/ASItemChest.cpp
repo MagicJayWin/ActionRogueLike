@@ -16,6 +16,11 @@ AASItemChest::AASItemChest()
 
 }
 
+void AASItemChest::InterAct_Implementation(APawn* InstigatorPawn)
+{
+	
+}
+
 // Called when the game starts or when spawned
 void AASItemChest::BeginPlay()
 {

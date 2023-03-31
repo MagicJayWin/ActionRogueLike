@@ -3,13 +3,16 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "SGamePlayInterface.h"
 #include "GameFramework/Actor.h"
 #include "ASItemChest.generated.h"
 
 UCLASS()
-class ACTIONROGUELIKE_API AASItemChest : public AActor
+class ACTIONROGUELIKE_API AASItemChest : public AActor, public ISGamePlayInterface
 {
 	GENERATED_BODY()
+
+	virtual void InterAct_Implementation(APawn* InstigatorPawn) override;
 	
 public:	
 	// Sets default values for this actor's properties
