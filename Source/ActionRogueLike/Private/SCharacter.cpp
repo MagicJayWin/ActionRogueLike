@@ -3,6 +3,7 @@
 
 #include "SCharacter.h"
 
+#include "SInteractionComponent.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
@@ -21,6 +22,9 @@ ASCharacter::ASCharacter()
 	//相机
 	CameraComp = CreateDefaultSubobject<UCameraComponent>("CameraComp");
 	CameraComp -> SetupAttachment(SpringArmComp);
+
+	//交互组件
+	InteractionComp = CreateDefaultSubobject<USInteractionComponent>("InteractionComp");
 
 	//自身禁止旋转
 	bUseControllerRotationYaw = false;
@@ -58,7 +62,8 @@ void ASCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 	//绑定动作
 	PlayerInputComponent->BindAction("PrimaryAttack", IE_Pressed, this, &ASCharacter::PrimaryAttack);
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ASCharacter::Jump);
-	
+	//交互
+		PlayerInputComponent->BindAction("PrimaryInteract", IE_Pressed, this, &ASCharacter::PrimaryInteract);
 }
 
 void ASCharacter::MoveForward(float value)
@@ -93,4 +98,12 @@ void ASCharacter::PrimaryAttack()
 
 	SpawnParam.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 	GetWorld() ->SpawnActor<AActor>(ProjectileClass, SpawnTM, SpawnParam);
+}
+
+void ASCharacter::PrimaryInteract()
+{
+	if (InteractionComp)
+	{
+		InteractionComp -> PrimaryInteract();
+	}
 }
