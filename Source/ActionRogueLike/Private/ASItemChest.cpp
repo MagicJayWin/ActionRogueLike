@@ -34,6 +34,5 @@ void AASItemChest::BeginPlay()
 void AASItemChest::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 

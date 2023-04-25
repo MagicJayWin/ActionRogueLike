@@ -41,33 +41,43 @@ void USInteractionComponent::PrimaryInteract()
 	//FHitResult 是 Unreal Engine 4 中用于表示碰撞检测结果的结构体。它包含了一些信息。
 	//比如被碰撞到的物体的指针、碰撞点、法线等等。
 	//我们可以使用 FHitResult 来判断游戏世界中的物体是否与其他物体发生了碰撞，并根据其返回的信息进行相应的处理。
-	FHitResult Hit;
+	//FHitResult Hit;
 	//包含了需要检测的物体类型（如 Static、Dynamic、Pawn、Vehicle 等）
 	FCollisionObjectQueryParams ObjectQueryParams;
 	ObjectQueryParams.AddObjectTypesToQuery(ECC_WorldDynamic);
-
-	
 	
 	AActor* Owner = GetOwner();
-	
-
 	FVector EyeLocation;
 	FRotator EyeRotation;
 	Owner -> GetActorEyesViewPoint(EyeLocation, EyeRotation);
 
 	const FVector End = EyeLocation + (EyeRotation.Vector() * 1000);
-	bool bBlockKingHit = GetWorld() -> LineTraceSingleByObjectType(Hit, EyeLocation, End, ObjectQueryParams);
+	//bool bBlockingHit = GetWorld() -> LineTraceSingleByObjectType(Hit, EyeLocation, End, ObjectQueryParams);
 
-	AActor* HitActor =  Hit.GetActor();
-	if (HitActor)
+	TArray<FHitResult> Hits;
+
+	float Radius = 30.f;
+	
+	FCollisionShape Shape;
+	Shape.SetSphere(Radius);
+	
+	bool bBlockingHit = GetWorld()->SweepMultiByObjectType(Hits, EyeLocation, End, FQuat::Identity, ObjectQueryParams, Shape);
+
+	FColor LineColor = bBlockingHit ? FColor::Green : FColor::Red;
+	for (FHitResult Hit : Hits)
 	{
-		if (HitActor -> Implements<USGamePlayInterface>())
+		AActor* HitActor =  Hit.GetActor();
+		if (HitActor)
 		{
-			APawn* MyPawn = Cast<APawn>(Owner);
-			ISGamePlayInterface::Execute_InterAct(HitActor, MyPawn);
+			if (HitActor -> Implements<USGamePlayInterface>())
+			{
+				APawn* MyPawn = Cast<APawn>(Owner);
+				ISGamePlayInterface::Execute_InterAct(HitActor, MyPawn);
+			}
 		}
+		DrawDebugSphere(GetWorld(), Hit.ImpactPoint, Radius, 32, LineColor, false, 2.0f);
 	}
-
-	FColor LineColor = bBlockKingHit ? FColor::Green : FColor::Red;
+	
 	DrawDebugLine(GetWorld(), EyeLocation, End, LineColor, false, 2.0f ,0 ,2.0f);
+	
 }

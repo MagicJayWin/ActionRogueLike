@@ -14,8 +14,13 @@ class ACTIONROGUELIKE_API ASCharacter : public ACharacter
 {
 	GENERATED_BODY()
 protected:
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category =  "Attack")
 	TSubclassOf<AActor> ProjectileClass;
+
+	UPROPERTY(EditAnywhere, Category =  "Attack")
+	UAnimMontage* AttackAnim;
+
+	FTimerHandle TimerHandle_PrimaryAttack;
 	
 public:
 	// Sets default values for this character's properties
@@ -43,6 +48,8 @@ protected:
 
 	//交互
 	void PrimaryInteract();
+
+	void PrimaryAttack_TimeElapsed();
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

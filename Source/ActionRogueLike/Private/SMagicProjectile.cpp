@@ -44,3 +44,7 @@ void ASMagicProjectile::Tick(float DeltaTime)
 
 }
 
+void ASMagicProjectile::OnConlionStart()
+{
+	
+}

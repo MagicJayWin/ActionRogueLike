@@ -63,7 +63,7 @@ void ASCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 	PlayerInputComponent->BindAction("PrimaryAttack", IE_Pressed, this, &ASCharacter::PrimaryAttack);
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ASCharacter::Jump);
 	//交互
-		PlayerInputComponent->BindAction("PrimaryInteract", IE_Pressed, this, &ASCharacter::PrimaryInteract);
+	PlayerInputComponent->BindAction("PrimaryInteract", IE_Pressed, this, &ASCharacter::PrimaryInteract);
 }
 
 void ASCharacter::MoveForward(float value)
@@ -91,13 +91,10 @@ void ASCharacter::MoveRight(float value)
 //攻击动作
 void ASCharacter::PrimaryAttack()
 {
-	const FVector HandLocation = GetMesh()->GetSocketLocation("Muzzle_01");
+	PlayAnimMontage(AttackAnim);
 
-	const FTransform SpawnTM = FTransform(GetControlRotation(), HandLocation);
-	FActorSpawnParameters SpawnParam;
-
-	SpawnParam.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
-	GetWorld() ->SpawnActor<AActor>(ProjectileClass, SpawnTM, SpawnParam);
+	GetWorldTimerManager().SetTimer(TimerHandle_PrimaryAttack, this, &ASCharacter::PrimaryAttack_TimeElapsed, 0.2f);
+	
 }
 
 void ASCharacter::PrimaryInteract()
@@ -106,4 +103,15 @@ void ASCharacter::PrimaryInteract()
 	{
 		InteractionComp -> PrimaryInteract();
 	}
+}
+
+void ASCharacter::PrimaryAttack_TimeElapsed()
+{
+	const FVector HandLocation = GetMesh()->GetSocketLocation("Muzzle_01");
+
+	const FTransform SpawnTM = FTransform(GetControlRotation(), HandLocation);
+	FActorSpawnParameters SpawnParam;
+
+	SpawnParam.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+	GetWorld() ->SpawnActor<AActor>(ProjectileClass, SpawnTM, SpawnParam);
 }

@@ -21,13 +21,14 @@ public:
 	UPROPERTY(EditAnywhere)
 	float TargetPitch;
 	void InterAct_Implementation(APawn* InstigatorPawn) ;
-	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool OpenState;
 
 protected:
 	UPROPERTY(VisibleAnywhere)
 	UStaticMeshComponent* BaseMesh;
 
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	UStaticMeshComponent* LidMesh;
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
