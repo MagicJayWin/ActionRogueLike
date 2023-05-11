@@ -113,5 +113,6 @@ void ASCharacter::PrimaryAttack_TimeElapsed()
 	FActorSpawnParameters SpawnParam;
 
 	SpawnParam.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+	SpawnParam.Instigator = this;
 	GetWorld() ->SpawnActor<AActor>(ProjectileClass, SpawnTM, SpawnParam);
 }

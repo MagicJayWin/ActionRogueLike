@@ -18,6 +18,7 @@ ASMagicProjectile::ASMagicProjectile()
 	SphereComp->SetCollisionProfileName("Projectile");
 	RootComponent = SphereComp;
 
+	
 	effectComp = CreateDefaultSubobject<UParticleSystemComponent>("effectComp");
 	effectComp -> SetupAttachment(SphereComp);
 
@@ -41,6 +42,7 @@ void ASMagicProjectile::BeginPlay()
 void ASMagicProjectile::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	SphereComp->OnComponentHit;
 
 }
 
