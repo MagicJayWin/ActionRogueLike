@@ -21,7 +21,7 @@ protected:
 	UAnimMontage* AttackAnim;
 
 	FTimerHandle TimerHandle_PrimaryAttack;
-	
+	FTimerHandle TimerHandle_Dash;
 public:
 	// Sets default values for this character's properties
 	ASCharacter();
@@ -36,6 +36,9 @@ protected:
 	//交互组件
 	UPROPERTY(VisibleAnywhere)
 	USInteractionComponent* InteractionComp;
+
+	UPROPERTY(EditAnywhere, Category = "Attack")
+	TSubclassOf<AActor> DashProjectileClass;
 	
 	//移动函数
 	void MoveForward(float value);
@@ -49,7 +52,15 @@ protected:
 	//交互
 	void PrimaryInteract();
 
+	//普通攻击定时函数
 	void PrimaryAttack_TimeElapsed();
+	//闪烁
+	void Dash();
+	void Dash_TimeElapsed();
+	//子弹集成
+	void SpawnProjectile(TSubclassOf<AActor> ClassToSpawn);
+
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
