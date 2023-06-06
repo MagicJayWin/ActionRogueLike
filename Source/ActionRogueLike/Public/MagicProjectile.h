@@ -14,9 +14,10 @@ class ACTIONROGUELIKE_API AMagicProjectile : public ASProjectBase
 {
 	GENERATED_BODY()
 public:
-	//构造，初始化子弹基本属性
+
 	AMagicProjectile();
 
 protected:
-	virtual void BeginPlay() override;
+	UFUNCTION()
+	void OnActorOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 };

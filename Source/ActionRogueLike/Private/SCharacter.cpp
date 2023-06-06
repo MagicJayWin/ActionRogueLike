@@ -23,6 +23,9 @@ ASCharacter::ASCharacter()
 	CameraComp = CreateDefaultSubobject<UCameraComponent>("CameraComp");
 	CameraComp -> SetupAttachment(SpringArmComp);
 
+	//属性
+	AttributeComp = CreateDefaultSubobject<USAttributeComponent>("AttributeComp");
+	
 	//交互组件
 	InteractionComp = CreateDefaultSubobject<USInteractionComponent>("InteractionComp");
 
@@ -64,6 +67,7 @@ void ASCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 	//闪烁
 	PlayerInputComponent->BindAction("Dash", IE_Pressed, this, &ASCharacter::Dash);
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ASCharacter::Jump);
+	PlayerInputComponent->BindAction("BlackHole", IE_Pressed, this, &ASCharacter::BlackHole);
 	//交互
 	PlayerInputComponent->BindAction("PrimaryInteract", IE_Pressed, this, &ASCharacter::PrimaryInteract);
 }
@@ -109,14 +113,7 @@ void ASCharacter::PrimaryInteract()
 
 void ASCharacter::PrimaryAttack_TimeElapsed()
 {
-	const FVector HandLocation = GetMesh()->GetSocketLocation("Muzzle_01");
-
-	const FTransform SpawnTM = FTransform(GetControlRotation(), CameraComp->GetComponentLocation());
-	FActorSpawnParameters SpawnParam;
-
-	SpawnParam.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
-	SpawnParam.Instigator = this;
-	GetWorld() ->SpawnActor<AActor>(ProjectileClass, SpawnTM, SpawnParam);
+	SpawnProjectile(MagicProjectClass);
 }
 
 //闪烁
@@ -129,6 +126,18 @@ void ASCharacter::Dash()
 void ASCharacter::Dash_TimeElapsed()
 {
 	SpawnProjectile(DashProjectileClass);
+}
+
+//黑洞
+void ASCharacter::BlackHole()
+{
+	PlayAnimMontage(AttackAnim);
+	GetWorldTimerManager().SetTimer(TimerHandle_Dash, this, &ASCharacter::BlackHole_TimeElapsed, 0.2f);
+}
+
+void ASCharacter::BlackHole_TimeElapsed()
+{
+	SpawnProjectile(BlackHoleProjectClass);
 }
 
 void ASCharacter::SpawnProjectile(TSubclassOf<AActor> ClassToSpawn)

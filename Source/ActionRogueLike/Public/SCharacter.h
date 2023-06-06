@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "SAttributeComponent.h"
 #include "GameFramework/Character.h"
 #include "SCharacter.generated.h"
 
@@ -15,9 +16,6 @@ class ACTIONROGUELIKE_API ASCharacter : public ACharacter
 	GENERATED_BODY()
 protected:
 	UPROPERTY(EditAnywhere, Category =  "Attack")
-	TSubclassOf<AActor> ProjectileClass;
-
-	UPROPERTY(EditAnywhere, Category =  "Attack")
 	UAnimMontage* AttackAnim;
 
 	FTimerHandle TimerHandle_PrimaryAttack;
@@ -25,7 +23,7 @@ protected:
 public:
 	// Sets default values for this character's properties
 	ASCharacter();
-
+ 
 protected:
 	UPROPERTY(VisibleAnywhere)
 	USpringArmComponent* SpringArmComp;
@@ -37,8 +35,18 @@ protected:
 	UPROPERTY(VisibleAnywhere)
 	USInteractionComponent* InteractionComp;
 
+	//属性
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	USAttributeComponent* AttributeComp;
+
 	UPROPERTY(EditAnywhere, Category = "Attack")
 	TSubclassOf<AActor> DashProjectileClass;
+
+	UPROPERTY(EditAnywhere, Category = "Attack")
+	TSubclassOf<AActor> MagicProjectClass;
+
+	UPROPERTY(EditAnywhere, Category = "Attack")
+	TSubclassOf<AActor> BlackHoleProjectClass;
 	
 	//移动函数
 	void MoveForward(float value);
@@ -57,6 +65,9 @@ protected:
 	//闪烁
 	void Dash();
 	void Dash_TimeElapsed();
+	//黑洞
+	void BlackHole();
+	void BlackHole_TimeElapsed();
 	//子弹集成
 	void SpawnProjectile(TSubclassOf<AActor> ClassToSpawn);
 
