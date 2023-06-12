@@ -25,6 +25,10 @@ public:
 	
 	UPROPERTY(BlueprintAssignable)
 	FOnHealthChanged OnHealthChanged;
+
+	//检测是否存货
+	UFUNCTION(BlueprintCallable)
+	bool IsAlive() const;
 	
 	UFUNCTION(BlueprintCallable, Category = "Attributes")
 	bool ApplyHealthChange(float Delta);
