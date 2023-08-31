@@ -70,6 +70,8 @@ protected:
 	void BlackHole_TimeElapsed();
 	//子弹集成
 	void SpawnProjectile(TSubclassOf<AActor> ClassToSpawn);
+	//绑定组件函数重写
+	virtual void PostInitializeComponents() override;
 
 
 public:	
@@ -78,5 +80,8 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	
+	UFUNCTION()
+	void OnHealthChanged(AActor* InstigatorActor, USAttributeComponent* OwningComp, float NewHealth, float Delta);
 
 };
