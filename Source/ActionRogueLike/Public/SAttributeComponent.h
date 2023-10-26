@@ -32,4 +32,8 @@ public:
 	
 	UFUNCTION(BlueprintCallable, Category = "Attributes")
 	bool ApplyHealthChange(float Delta);
+
+	//获取当前生命值
+	UFUNCTION()
+	float GetHealth() const;
 };

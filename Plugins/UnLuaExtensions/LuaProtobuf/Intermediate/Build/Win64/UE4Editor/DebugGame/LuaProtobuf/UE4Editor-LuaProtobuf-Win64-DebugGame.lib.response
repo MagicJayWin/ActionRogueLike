@@ -1,0 +1,13 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UE4Editor-LuaProtobuf-Win64-DebugGame.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"D:\UeDemo\ActionRogueLike\Intermediate\Build\Win64\ActionRogueLikeEditor\DebugGame\Engine\SharedPCH.Engine.NonOptimized.ShadowErrors.NoUndef.h.obj"
+"D:\UeDemo\ActionRogueLike\Plugins\UnLuaExtensions\LuaProtobuf\Intermediate\Build\Win64\UE4Editor\DebugGame\LuaProtobuf\LuaProtobufModule.cpp.obj"
+"D:\UeDemo\ActionRogueLike\Plugins\UnLuaExtensions\LuaProtobuf\Intermediate\Build\Win64\UE4Editor\DebugGame\LuaProtobuf\pb.cpp.obj"
+"D:\UeDemo\ActionRogueLike\Plugins\UnLuaExtensions\LuaProtobuf\Intermediate\Build\Win64\UE4Editor\DebugGame\LuaProtobuf\Default.rc2.res"
+/OUT:"D:\UeDemo\ActionRogueLike\Plugins\UnLuaExtensions\LuaProtobuf\Intermediate\Build\Win64\UE4Editor\DebugGame\LuaProtobuf\UE4Editor-LuaProtobuf-Win64-DebugGame.lib"

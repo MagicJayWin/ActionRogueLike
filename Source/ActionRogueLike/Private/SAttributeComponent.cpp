@@ -24,5 +24,10 @@ bool USAttributeComponent::ApplyHealthChange(float Delta)
 	return true;
 }
 
+float USAttributeComponent::GetHealth() const
+{
+	return Health;
+}
+
 
 

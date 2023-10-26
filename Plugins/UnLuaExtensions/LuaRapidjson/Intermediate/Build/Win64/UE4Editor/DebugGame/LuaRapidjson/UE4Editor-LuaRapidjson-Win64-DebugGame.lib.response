@@ -1,0 +1,16 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UE4Editor-LuaRapidjson-Win64-DebugGame.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"D:\UeDemo\ActionRogueLike\Intermediate\Build\Win64\ActionRogueLikeEditor\DebugGame\Engine\SharedPCH.Engine.NonOptimized.ShadowErrors.NoUndef.h.obj"
+"D:\UeDemo\ActionRogueLike\Plugins\UnLuaExtensions\LuaRapidjson\Intermediate\Build\Win64\UE4Editor\DebugGame\LuaRapidjson\LuaRapidjsonModule.cpp.obj"
+"D:\UeDemo\ActionRogueLike\Plugins\UnLuaExtensions\LuaRapidjson\Intermediate\Build\Win64\UE4Editor\DebugGame\LuaRapidjson\Document.cpp.obj"
+"D:\UeDemo\ActionRogueLike\Plugins\UnLuaExtensions\LuaRapidjson\Intermediate\Build\Win64\UE4Editor\DebugGame\LuaRapidjson\rapidjson.cpp.obj"
+"D:\UeDemo\ActionRogueLike\Plugins\UnLuaExtensions\LuaRapidjson\Intermediate\Build\Win64\UE4Editor\DebugGame\LuaRapidjson\Schema.cpp.obj"
+"D:\UeDemo\ActionRogueLike\Plugins\UnLuaExtensions\LuaRapidjson\Intermediate\Build\Win64\UE4Editor\DebugGame\LuaRapidjson\values.cpp.obj"
+"D:\UeDemo\ActionRogueLike\Plugins\UnLuaExtensions\LuaRapidjson\Intermediate\Build\Win64\UE4Editor\DebugGame\LuaRapidjson\Default.rc2.res"
+/OUT:"D:\UeDemo\ActionRogueLike\Plugins\UnLuaExtensions\LuaRapidjson\Intermediate\Build\Win64\UE4Editor\DebugGame\LuaRapidjson\UE4Editor-LuaRapidjson-Win64-DebugGame.lib"

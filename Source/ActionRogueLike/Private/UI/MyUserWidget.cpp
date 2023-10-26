@@ -18,6 +18,13 @@ void UMyUserWidget::NativeConstruct()
 	{
 		AttributeComponent->OnHealthChanged.AddDynamic(this, &UMyUserWidget::OnHealthChanged);
 	}
+	//先设置一下生命值
+	const float Health = AttributeComponent->GetHealth();
+
+	UTextBlock* HealthText = Cast<UTextBlock>(this->GetWidgetFromName(TEXT("HealthText")));
+	//SanitizeFloat格式化为String再转为FText
+	const FText NewText = FText::FromString(FString::SanitizeFloat(Health));
+	HealthText->SetText(NewText);
 }
 
 void UMyUserWidget::OnHealthChanged(AActor* InstigatorActor, USAttributeComponent* OwningComp, float NewHealth,

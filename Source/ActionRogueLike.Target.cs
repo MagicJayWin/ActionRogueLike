@@ -9,6 +9,6 @@ public class ActionRogueLikeTarget : TargetRules
 	{
 		Type = TargetType.Game;
 		DefaultBuildSettings = BuildSettingsVersion.V2;
-		ExtraModuleNames.AddRange( new string[] { "ActionRogueLike" } );
+		ExtraModuleNames.AddRange( new string[] { "ActionRogueLike","Unlua"} );
 	}
 }

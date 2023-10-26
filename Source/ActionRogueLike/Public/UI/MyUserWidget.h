@@ -24,5 +24,5 @@ public:
 
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "NormalSetting")
-	UTexture* ButtonPic;
+	UTexture* HealthPic;
 };
